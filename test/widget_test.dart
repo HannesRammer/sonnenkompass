@@ -1,13 +1,32 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sonnenkompass/src/app.dart';
 
 void main() {
   testWidgets('renders the Sonnenkompass prototype', (tester) async {
+    SharedPreferences.setMockInitialValues({});
     await tester.pumpWidget(const SonnenkompassApp());
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    await tester.pump(const Duration(milliseconds: 500));
+
+    expect(find.text('Dashboard'), findsOneWidget);
+    expect(find.text('Heute im Kern'), findsOneWidget);
+    expect(find.text('Naechste Schritte'), findsOneWidget);
+    expect(find.text('Orbit'), findsOneWidget);
+  });
+
+  testWidgets('navigates to the review screen', (tester) async {
+    SharedPreferences.setMockInitialValues({});
+    await tester.pumpWidget(const SonnenkompassApp());
+    await tester.pump();
+    await tester.pump(const Duration(milliseconds: 500));
+    await tester.pump(const Duration(milliseconds: 500));
+
+    await tester.tap(find.text('Review').last);
     await tester.pumpAndSettle();
 
-    expect(find.text('Rammer Sonnenkompass MVP'), findsOneWidget);
-    expect(find.text('Block-Stundenplan'), findsOneWidget);
-    expect(find.text('Monetization Layer'), findsOneWidget);
+    expect(find.text('Tagesrueckblick'), findsOneWidget);
+    expect(find.text('Review speichern'), findsOneWidget);
   });
 }

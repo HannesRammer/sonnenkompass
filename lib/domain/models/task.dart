@@ -36,6 +36,42 @@ class Task {
   final DateTime createdAt;
   final DateTime updatedAt;
 
+  Task copyWith({
+    String? id,
+    String? rayId,
+    String? projectId,
+    String? ideaId,
+    String? title,
+    String? description,
+    TaskStatus? status,
+    PriorityLevel? priority,
+    EnergyLevel? energyFit,
+    int? estimatedMinutes,
+    DateTime? scheduledForDate,
+    DateTime? dueAt,
+    bool? isRoutine,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return Task(
+      id: id ?? this.id,
+      rayId: rayId ?? this.rayId,
+      projectId: projectId ?? this.projectId,
+      ideaId: ideaId ?? this.ideaId,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      status: status ?? this.status,
+      priority: priority ?? this.priority,
+      energyFit: energyFit ?? this.energyFit,
+      estimatedMinutes: estimatedMinutes ?? this.estimatedMinutes,
+      scheduledForDate: scheduledForDate ?? this.scheduledForDate,
+      dueAt: dueAt ?? this.dueAt,
+      isRoutine: isRoutine ?? this.isRoutine,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
+
   Map<String, dynamic> toJson() => {
         'id': id,
         'rayId': rayId,
@@ -79,4 +115,3 @@ class Task {
     );
   }
 }
-

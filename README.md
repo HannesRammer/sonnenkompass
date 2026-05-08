@@ -1,6 +1,6 @@
 # Rammer Sonnenkompass
 
-Konsolidierte Grundlage fuer deinen Sonnenkompass aus dem bisherigen Chat-Verlauf.
+Aktueller Stand der webbasierten Sonnenkompass-App auf Basis von Flutter Web.
 
 ## Ziel
 
@@ -120,8 +120,40 @@ Monatliche Regel:
 9. Der Kalender orientiert sich an Energie und Realitaet, nicht an Perfektion.
 10. Fokus wird geschuetzt, nicht durch Starrheit, sondern durch klare Aktivierung.
 
+## Aktueller Prototyp-Stand
+
+- Plattform: Flutter Web
+- Aktueller Remote-Stand analysiert: `origin/main` auf Commit `61ab0a8` vom 8. Mai 2026
+- Routing: echte Web-Routen mit Browser-History fuer `Dashboard`, `Heute`, `Strahlen`, `Projekt`, `Idee` und `Review`
+- Persistenz: lokaler App-State via `shared_preferences`
+- Datenquelle: initiale Seed-Daten in [lib/domain/seed/seed_data.dart](D:\projects\Projects\sonnenkompass\lib\domain\seed\seed_data.dart), danach persistenter lokaler App-Zustand
+- Kernfluss: Fokus setzen, Orbit pflegen, Aufgaben bearbeiten, Ideen anlegen oder in Projekte umwandeln, Review speichern
+
+## Bereits korrigiert
+
+- kaputter Font-Aufruf im Theme repariert, damit Tests und Build wieder laufen
+- Web-Metadaten (`title`, `description`, Manifest-Farben) an das Produkt angepasst
+- Path-URL-Strategie fuer Web aktiviert
+- echte Mehrscreen-Struktur mit Navigation Rail / Navigation Bar und Deep-Link-faehigen Routen aufgebaut
+- lokale Persistenz fuer Projekte, Ideen, Tasks, Orbit, Bewegungsplan, Routinen und Review eingebaut
+- konkrete Tagesaufgaben aus dem Domain-Modell angeschlossen statt leeren `mustDo`-/`optional`-Zustaenden
+- Seed-Daten fuer Trading, Bewegung und Alltag ergaenzt, damit diese Strahlen keine inhaltlichen Sackgassen mehr sind
+- Projekt-Detailseiten, Ideen-Detailseiten und Review-Seite mit echten Aktionen angeschlossen
+- Ideen koennen in Projekte ueberfuehrt werden, statt als tote Objekte im Backlog zu bleiben
+- Label-Sprache weitgehend auf konsistentes Deutsch umgestellt
+- leere `free_workouts`-Feature-Struktur und die alte Einseiten-Prototyp-View entfernt
+
+## Noch offene Produktluecken
+
+- keine Sync- oder Multi-Device-Strategie, nur lokaler Browser-/App-Speicher
+- keine echten externen Referenzlinks oder Medienbelege trotz vorhandenem `MediaAttachment`-Modell
+- noch keine Verlaufs- oder Historienansicht ueber mehrere Tage hinweg
+- Task-Planung ist funktional, aber noch kein vollwertiger Planer mit Erstellen/Bearbeiten neuer Tasks im UI
+- noch keine Authentifizierung oder Export-/Backup-Funktion
+
 ## Dateien in diesem Repo
 
-- [master-prompt-google-ai-studio.md](D:\projects\Projects\sonnenkompass\master-prompt-google-ai-studio.md): Hauptprompt fuer Google AI Studio
-- [prototyp-priorisierung-aus-scan.md](D:\projects\Projects\sonnenkompass\prototyp-priorisierung-aus-scan.md): priorisierte Auswertung der gefundenen Ideen nach Nutzen, Substanz, Testbarkeit und Risiko
 - [README.md](D:\projects\Projects\sonnenkompass\README.md): kompakte Produktspezifikation
+- [sonnenkompass-plan.md](D:\projects\Projects\sonnenkompass\sonnenkompass-plan.md): laufender Plan, Analyse und naechste Schritte fuer dieses Repo
+- [sonnenkompass-zeitmodell.md](D:\projects\Projects\sonnenkompass\sonnenkompass-zeitmodell.md): konzeptionelle Beschreibung von Fixankern, Pflicht-Rhythmus und Fokusfenstern
+- [datenmodell-vorschlag.md](D:\projects\Projects\sonnenkompass\datenmodell-vorschlag.md): fruehes fachliches Datenmodell fuer Rays, Projekte, Ideen, Tasks und FocusDay
