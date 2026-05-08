@@ -74,31 +74,23 @@ class SonnenkompassHomePage extends StatelessWidget {
       ..sort((a, b) => a.startTime.compareTo(b.startTime));
 
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            colors: [Color(0xFFFFF8F0), Color(0xFFFFEFDB)],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-        ),
-        child: SafeArea(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(24),
-            child: Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1320),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
-                      children: [
-                        _pill('Rammer Sonnenkompass MVP', dark: true),
-                        _pill(profile.defaultMovementVenue),
-                        _pill('3 Mahlzeiten wenn moeglich'),
-                        _pill('1 Kern + max. 2 Nebenstrahlen'),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.all(24),
+          child: Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1320),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Wrap(
+                    spacing: 10,
+                    runSpacing: 10,
+                    children: [
+                      _pill('Rammer Sonnenkompass MVP', dark: true),
+                      _pill(profile.defaultMovementVenue),
+                      _pill('3 Mahlzeiten wenn moeglich'),
+                      _pill('1 Kern + max. 2 Nebenstrahlen'),
                       ],
                     ),
                     const SizedBox(height: 18),
@@ -196,7 +188,6 @@ class SonnenkompassHomePage extends StatelessWidget {
             ),
           ),
         ),
-      ),
     );
   }
 
@@ -205,11 +196,8 @@ class SonnenkompassHomePage extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(28),
       decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFF6CF89), Color(0xFFE47B38)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
+        color: const Color(0xFF0F0F0F),
+        border: Border.all(color: const Color(0xFF1E1E1E)),
         borderRadius: BorderRadius.circular(30),
       ),
       child: LayoutBuilder(
@@ -220,8 +208,9 @@ class SonnenkompassHomePage extends StatelessWidget {
               const Text(
                 'Heute im Kern',
                 style: TextStyle(
-                  color: Color(0xFF51311E),
+                  color: Color(0xFFF59E0B),
                   fontWeight: FontWeight.w700,
+                  letterSpacing: 2.0,
                 ),
               ),
               const SizedBox(height: 10),
@@ -231,14 +220,14 @@ class SonnenkompassHomePage extends StatelessWidget {
                   fontSize: 38,
                   height: 1,
                   fontWeight: FontWeight.w800,
-                  color: Color(0xFF20130D),
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 10),
               Text(
                 primaryProject.currentGoal,
                 style: const TextStyle(
-                  color: Color(0xFF4F3525),
+                  color: Color(0xFFAAAAAA),
                   height: 1.45,
                 ),
               ),
@@ -963,7 +952,8 @@ Widget _panel(String title, String subtitle, Widget child) {
     width: double.infinity,
     padding: const EdgeInsets.all(22),
     decoration: BoxDecoration(
-      color: const Color(0xFFFDF8F2),
+      color: const Color(0xFF0A0A0A),
+      border: Border.all(color: const Color(0xFF1E1E1E)),
       borderRadius: BorderRadius.circular(28),
     ),
     child: Column(
@@ -971,12 +961,12 @@ Widget _panel(String title, String subtitle, Widget child) {
       children: [
         Text(
           title,
-          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800),
+          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w800, color: Colors.white),
         ),
         const SizedBox(height: 6),
         Text(
           subtitle,
-          style: const TextStyle(color: Color(0xFF6B5545), height: 1.4),
+          style: const TextStyle(color: Color(0xFF888888), height: 1.4),
         ),
         const SizedBox(height: 18),
         child,
@@ -989,14 +979,16 @@ Widget _pill(String label, {bool dark = false}) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
     decoration: BoxDecoration(
-      color: dark ? const Color(0xFF352219) : Colors.white,
+      color: dark ? const Color(0xFFF59E0B) : const Color(0xFF111111),
+      border: dark ? null : Border.all(color: const Color(0xFF222222)),
       borderRadius: BorderRadius.circular(999),
     ),
     child: Text(
       label,
       style: TextStyle(
-        color: dark ? const Color(0xFFF1E0D1) : const Color(0xFF6B5545),
+        color: dark ? const Color(0xFF111111) : const Color(0xFFAAAAAA),
         fontWeight: FontWeight.w600,
+        fontSize: 12,
       ),
     ),
   );
@@ -1006,7 +998,8 @@ Widget _statusChip(String label) {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
     decoration: BoxDecoration(
-      color: const Color(0xFFFFE7D1),
+      color: const Color(0xFF111111),
+      border: Border.all(color: const Color(0xFF222222)),
       borderRadius: BorderRadius.circular(999),
     ),
     child: Text(
@@ -1029,7 +1022,7 @@ Widget _orbitCard({
     width: double.infinity,
     padding: const EdgeInsets.all(16),
     decoration: BoxDecoration(
-      color: Colors.white,
+      color: const Color(0xFF111111),
       borderRadius: BorderRadius.circular(20),
       border: Border.all(color: accent.withValues(alpha: 0.35)),
     ),
@@ -1043,12 +1036,12 @@ Widget _orbitCard({
         const SizedBox(height: 8),
         Text(
           title,
-          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700, color: Colors.white),
         ),
         const SizedBox(height: 6),
         Text(
           body,
-          style: const TextStyle(color: Color(0xFF6B5545), height: 1.4),
+          style: const TextStyle(color: Color(0xFFAAAAAA), height: 1.4),
         ),
       ],
     ),
