@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -33,19 +35,29 @@ class RaysPage extends StatelessWidget {
         children: [
           panel(
             'Strahl wechseln',
-            'Keine versteckten Bereiche mehr.',
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              children: store.rays
-                  .map(
-                    (ray) => ChoiceChip(
-                      selected: selectedRay.id == ray.id,
-                      label: Text(ray.name),
-                      onSelected: (_) => context.go('/rays/${ray.id}'),
-                    ),
-                  )
-                  .toList(),
+            'Die Strahlen sind der aeussere Orientierungskreis des Sonnenkompasses.',
+            Column(
+              children: [
+                _RayCompass(
+                  rays: store.rays,
+                  selectedRayId: selectedRay.id,
+                  onSelect: (ray) => context.go('/rays/${ray.id}'),
+                ),
+                const SizedBox(height: 18),
+                Wrap(
+                  spacing: 8,
+                  runSpacing: 8,
+                  children: store.rays
+                      .map(
+                        (ray) => ChoiceChip(
+                          selected: selectedRay.id == ray.id,
+                          label: Text(ray.name),
+                          onSelected: (_) => context.go('/rays/${ray.id}'),
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
             ),
           ),
           const SizedBox(height: 18),
@@ -185,6 +197,130 @@ class RaysPage extends StatelessWidget {
               child: const Text('Speichern'),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _RayCompass extends StatelessWidget {
+  const _RayCompass({
+    required this.rays,
+    required this.selectedRayId,
+    required this.onSelect,
+  });
+
+  final List<Ray> rays;
+  final String selectedRayId;
+  final ValueChanged<Ray> onSelect;
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final size = math.min(constraints.maxWidth, 520.0);
+        final radius = size * 0.34;
+        return Center(
+          child: SizedBox(
+            width: size,
+            height: size,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: size * 0.9,
+                  height: size * 0.9,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: const Color(0xFF232323)),
+                  ),
+                ),
+                Container(
+                  width: size * 0.55,
+                  height: size * 0.55,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(color: const Color(0xFF34281C)),
+                  ),
+                ),
+                Container(
+                  width: size * 0.24,
+                  height: size * 0.24,
+                  decoration: const BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Color(0xFFE47B38),
+                  ),
+                  child: const Center(
+                    child: Text(
+                      'Strahlen',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Color(0xFF111111),
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                  ),
+                ),
+                for (var i = 0; i < rays.length; i++)
+                  Transform.translate(
+                    offset: Offset(
+                      math.cos((-math.pi / 2) + (i * (2 * math.pi / rays.length))) *
+                          radius,
+                      math.sin((-math.pi / 2) + (i * (2 * math.pi / rays.length))) *
+                          radius,
+                    ),
+                    child: _RayNode(
+                      ray: rays[i],
+                      selected: rays[i].id == selectedRayId,
+                      onTap: () => onSelect(rays[i]),
+                    ),
+                  ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _RayNode extends StatelessWidget {
+  const _RayNode({
+    required this.ray,
+    required this.selected,
+    required this.onTap,
+  });
+
+  final Ray ray;
+  final bool selected;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: BorderRadius.circular(18),
+      onTap: onTap,
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 120),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+        decoration: BoxDecoration(
+          color: selected ? const Color(0xFFF59E0B) : const Color(0xFF111111),
+          borderRadius: BorderRadius.circular(18),
+          border: Border.all(
+            color: selected
+                ? const Color(0xFFF59E0B)
+                : Colors.white.withValues(alpha: 0.08),
+          ),
+        ),
+        child: Text(
+          ray.name,
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: selected ? const Color(0xFF111111) : Colors.white,
+            fontWeight: FontWeight.w700,
+            fontSize: 12,
+            height: 1.2,
+          ),
         ),
       ),
     );

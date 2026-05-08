@@ -11,9 +11,10 @@ void main() {
     await tester.pump(const Duration(milliseconds: 500));
 
     expect(find.text('Dashboard'), findsOneWidget);
+    expect(find.text('Sonnenkompass Modell'), findsOneWidget);
     expect(find.text('Heute im Kern'), findsOneWidget);
     expect(find.text('Naechste Schritte'), findsOneWidget);
-    expect(find.text('Orbit'), findsOneWidget);
+    expect(find.text('Zu Heute'), findsOneWidget);
   });
 
   testWidgets('navigates to the review screen', (tester) async {

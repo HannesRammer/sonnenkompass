@@ -4,7 +4,7 @@ Aktueller Stand der webbasierten Sonnenkompass-App auf Basis von Flutter Web.
 
 ## Ziel
 
-Der Sonnenkompass ist kein normales Produktivitaetssystem. Er ist ein Fokus-System fuer einen kreativen Multi-Projekt-Menschen mit:
+Der Sonnenkompass ist nicht nur ein Kompass. Er ist eine Mischung aus Fokus-System, Stundenplan, Kreislogik und Projektsteuerung fuer einen kreativen Multi-Projekt-Menschen mit:
 
 - 40-Stunden-Job
 - flexiblen Arbeitszeiten
@@ -21,10 +21,11 @@ Ideen duerfen parallel existieren. Umsetzung wird bewusst gebuendelt.
 
 ## Kernmodell
 
-- `Sonnenkern`: genau 1 Hauptfokus fuer den Tag
-- `Sonnenstrahlen`: 6 bis 8 feste Lebens- und Projektbereiche
-- `Strahl-Backlogs`: pro Strahl eigene Ideen- und Aufgabenliste
+- `Kern`: genau 1 Hauptfokus fuer den Tag
+- `Fixkreis`: wiederkehrende Pflichten, Routinen und unverhandelbare Tagesanker
 - `Orbit`: nur 1 Hauptfokus plus maximal 1 bis 2 aktive Nebenbereiche
+- `Strahlen`: 6 bis 8 langfristige Lebens- und Projektbereiche
+- `Zeitstrahlen`: reale Tagesfenster wie Vormittag, Nachmittag und Abend
 - `Archiv`: pausierte, verworfene oder erledigte Themen bleiben nachvollziehbar
 
 ## Realitaetsmodell
@@ -128,6 +129,7 @@ Monatliche Regel:
 - Persistenz: lokaler App-State via `shared_preferences`
 - Datenquelle: initiale Seed-Daten in [lib/domain/seed/seed_data.dart](D:\projects\Projects\sonnenkompass\lib\domain\seed\seed_data.dart), danach persistenter lokaler App-Zustand
 - Kernfluss: Fokus setzen, Orbit pflegen, Aufgaben bearbeiten, Ideen anlegen oder in Projekte umwandeln, Review speichern
+- Dashboard und Strahlenansicht visualisieren das Modell jetzt kreisfoermiger statt nur als lineare Listen
 
 ## Bereits korrigiert
 
@@ -150,10 +152,12 @@ Monatliche Regel:
 - noch keine Verlaufs- oder Historienansicht ueber mehrere Tage hinweg
 - Task-Planung ist funktional, aber noch kein vollwertiger Planer mit Erstellen/Bearbeiten neuer Tasks im UI
 - noch keine Authentifizierung oder Export-/Backup-Funktion
+- Fixkreis, Kern, Orbit, Strahlen und Zeitstrahlen sind im Dashboard bereits visuell angedeutet, aber noch nicht als vollstaendige explizite Datenobjekte getrennt modelliert
 
 ## Dateien in diesem Repo
 
 - [README.md](D:\projects\Projects\sonnenkompass\README.md): kompakte Produktspezifikation
 - [sonnenkompass-plan.md](D:\projects\Projects\sonnenkompass\sonnenkompass-plan.md): laufender Plan, Analyse und naechste Schritte fuer dieses Repo
+- [sonnenkompass-app-dokumentation.md](D:\projects\Projects\sonnenkompass\sonnenkompass-app-dokumentation.md): ausfuehrliche Doku zu Screens, Layouts, Funktionen, Architektur und offenen Baustellen
 - [sonnenkompass-zeitmodell.md](D:\projects\Projects\sonnenkompass\sonnenkompass-zeitmodell.md): konzeptionelle Beschreibung von Fixankern, Pflicht-Rhythmus und Fokusfenstern
 - [datenmodell-vorschlag.md](D:\projects\Projects\sonnenkompass\datenmodell-vorschlag.md): fruehes fachliches Datenmodell fuer Rays, Projekte, Ideen, Tasks und FocusDay

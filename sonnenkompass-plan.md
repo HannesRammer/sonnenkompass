@@ -26,6 +26,9 @@ Stand: 2026-05-09
 - alte monolithische Home-Page entfernt
 - Widget-Tests an die neue Architektur angepasst und erweitert
 - fachfremde Alt-Markdown-Dateien entfernt, damit das Repo nur noch Sonnenkompass-relevante Doku enthaelt
+- ausfuehrliche App-Dokumentation fuer Screens, Layouts, Funktionen, Entscheidungen und offene Baustellen angelegt
+- Dashboard in ein kreisfoermiges Hybridmodell aus Kern, Fixkreis, Orbit, Strahlen und Zeitstrahlen ueberfuehrt
+- Strahlenansicht um eine radiale Strahl-Navigation erweitert
 
 ## Analyse: was besser ist
 
@@ -33,6 +36,7 @@ Stand: 2026-05-09
 - Persistenz macht Interaktion jetzt zustandsbehaftet statt rein fluechtig
 - Kern, Orbit, Tagesaufgaben, Strahlwechsel, Ideenpflege und Review greifen konsistenter ineinander
 - Projekte und Ideen enden nicht mehr nur in Karten, sondern fuehren zu echten Detail- und Bearbeitungsansichten
+- das Produktbild ist jetzt naeher an der eigentlichen Idee: nicht nur Projektlisten, sondern ein kombinierter Stundenplan-/Kompass-/Kreisansatz
 
 ## Analyse: was fehlt oder zu stark von sauberer Produktlogik abweicht
 
@@ -41,11 +45,13 @@ Stand: 2026-05-09
 - `MediaAttachment` und echte Referenz-/Belegobjekte sind modelliert, aber noch nicht in die UI integriert.
 - es fehlen externe Links, Quellen oder Artefakte pro Projekt bzw. Idee.
 - es gibt noch keine mehrtaegige Verlaufslogik oder echte Historie ueber Reviews hinweg.
+- Fixkreis und Zeitstrahlen sind aktuell noch aus bestehenden Tagesdaten abgeleitet statt als erste eigene Fachobjekte modelliert.
 
 ### UX-/Inhaltsqualitaet
 
 - Die App ist jetzt deutlich naeher an einer Arbeitsanwendung, aber noch nicht bei Sync-, Backup- und Historienreife.
 - Task-Planung ist noch nicht vollstaendig im UI editierbar.
+- Die neue Kreisoptik ist deutlich naeher an der Produktidee, braucht aber noch echte Browser-Pruefung auf Feinschliff, Abstaende und Responsiveness.
 
 ## Naechste sinnvolle Schritte
 
@@ -58,6 +64,7 @@ Stand: 2026-05-09
 ## Offene To-dos
 
 - Browser-Check des laufenden Web-Builds gegen echte Render-/Overflow-Probleme
+  - In-App-Browser konnte am 9. Mai 2026 lokal nicht sauber validieren, weil `localhost:7357` im Browser-Plugin durch Client-Blocking/Accessibility-Gate nicht normal gerendert wurde.
 - inhaltliche Verlinkung und Medienbelege fuer Projekte und Ideen implementieren
 - Tests ueber Rendering und Navigation hinaus fuer State-Persistenz und Kernfluss ausbauen
-- README spaeter um Architektur- und Datenflussbild ergaenzen
+- spaeter Architektur- und Datenflussbild in die App-Doku integrieren
