@@ -19,4 +19,3 @@ class FixedSlot {
   final bool isFixed;
   final String? notes;
 }
-

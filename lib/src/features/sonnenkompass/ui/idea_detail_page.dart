@@ -68,7 +68,8 @@ class IdeaDetailPage extends StatelessWidget {
                         (status) => ChoiceChip(
                           selected: idea.status == status,
                           label: Text(status.name),
-                          onSelected: (_) => store.updateIdeaStatus(idea.id, status),
+                          onSelected: (_) =>
+                              store.updateIdeaStatus(idea.id, status),
                         ),
                       )
                       .toList(),

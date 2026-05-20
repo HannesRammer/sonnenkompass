@@ -91,7 +91,8 @@ final seedRays = <Ray>[
     id: 'ray-life',
     slug: 'household-cats-life',
     name: 'Haushalt / Katzen / Alltag',
-    description: 'Wohnung, Katzen, Essen, kleine Orga und alltaegliche Stabilitaet.',
+    description:
+        'Wohnung, Katzen, Essen, kleine Orga und alltaegliche Stabilitaet.',
     type: RayType.life,
     color: 'sun-sand',
     icon: 'home',

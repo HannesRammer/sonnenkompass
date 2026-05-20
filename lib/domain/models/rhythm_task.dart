@@ -19,4 +19,3 @@ class RhythmTask {
   final bool outsideHome;
   final String notes;
 }
-

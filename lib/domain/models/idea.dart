@@ -108,8 +108,7 @@ class Idea {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       duplicateOfIdeaId: duplicateOfIdeaId ?? this.duplicateOfIdeaId,
-      convertedToProjectId:
-          convertedToProjectId ?? this.convertedToProjectId,
+      convertedToProjectId: convertedToProjectId ?? this.convertedToProjectId,
       archivedReason: archivedReason ?? this.archivedReason,
     );
   }

@@ -332,6 +332,8 @@ Das aktuelle Theme setzt auf:
 - schwarzen Grund
 - warme Bernstein-/Gold-Akzente
 - editoriale Typografie
+- feine Rahmen statt schwerer Kartenoptik
+- Serif-Akzente fuer Titel und ruhigere Sans-Serif-Flaechen fuer Arbeitsinhalte
 
 Warum:
 

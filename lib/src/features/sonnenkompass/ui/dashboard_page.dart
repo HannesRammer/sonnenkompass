@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../../domain/models/models.dart';
@@ -53,10 +54,11 @@ class DashboardPage extends StatelessWidget {
                   children: [
                     Text(
                       store.primaryProject.name,
-                      style: const TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w800,
-                        color: Colors.white,
+                      style: GoogleFonts.cormorantGaramond(
+                        fontSize: 42,
+                        fontWeight: FontWeight.w600,
+                        fontStyle: FontStyle.italic,
+                        color: const Color(0xFFFFF3E7),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -73,8 +75,10 @@ class DashboardPage extends StatelessWidget {
                       runSpacing: 8,
                       children: [
                         pill('Arbeit ${_workLabel(store.focusDay.workMode)}'),
-                        pill('Energie ${_energyLabel(store.focusDay.energyLevel)}'),
-                        pill('Bewegung ${_movementStatus(store.movementPlan.status)}'),
+                        pill(
+                            'Energie ${_energyLabel(store.focusDay.energyLevel)}'),
+                        pill(
+                            'Bewegung ${_movementStatus(store.movementPlan.status)}'),
                       ],
                     ),
                     const SizedBox(height: 18),
@@ -98,8 +102,9 @@ class DashboardPage extends StatelessWidget {
                     const Text(
                       'Fixkreis heute',
                       style: TextStyle(
-                        fontSize: 18,
+                        fontSize: 17,
                         fontWeight: FontWeight.w700,
+                        color: Color(0xFFF1E4D2),
                       ),
                     ),
                     const SizedBox(height: 10),
@@ -114,12 +119,13 @@ class DashboardPage extends StatelessWidget {
                       runSpacing: 12,
                       children: [
                         FilledButton(
-                          onPressed: () =>
-                              context.go('/projects/${store.primaryProject.id}'),
+                          onPressed: () => context
+                              .go('/projects/${store.primaryProject.id}'),
                           child: const Text('Projekt oeffnen'),
                         ),
                         OutlinedButton(
-                          onPressed: () => context.go('/rays/${store.primaryProject.rayId}'),
+                          onPressed: () =>
+                              context.go('/rays/${store.primaryProject.rayId}'),
                           child: const Text('Zum Strahl'),
                         ),
                       ],
@@ -151,7 +157,8 @@ class DashboardPage extends StatelessWidget {
                 'Muss heute passieren und darf nicht im schoensten Layout stecken bleiben.',
                 Column(
                   children: [
-                    ...store.mustDoTasks.map((task) => _taskTile(task, context)),
+                    ...store.mustDoTasks
+                        .map((task) => _taskTile(task, context)),
                     const SizedBox(height: 8),
                     Align(
                       alignment: Alignment.centerLeft,
@@ -206,24 +213,40 @@ class DashboardPage extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: const Color(0xFF111111),
-        borderRadius: BorderRadius.circular(20),
+        color: const Color(0xFF101010),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: const Color(0xFF1D1B18)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(label, style: const TextStyle(color: Color(0xFFF59E0B))),
-          const SizedBox(height: 8),
           Text(
-            title,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 18,
+            label.toUpperCase(),
+            style: GoogleFonts.jetBrainsMono(
+              color: const Color(0xFFFFA31A),
+              fontSize: 11,
+              letterSpacing: 1.8,
               fontWeight: FontWeight.w700,
             ),
           ),
+          const SizedBox(height: 8),
+          Text(
+            title,
+            style: GoogleFonts.cormorantGaramond(
+              color: const Color(0xFFFFF4E8),
+              fontSize: 26,
+              fontStyle: FontStyle.italic,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           const SizedBox(height: 6),
-          Text(body, style: const TextStyle(color: Color(0xFFAAAAAA), height: 1.35)),
+          Text(
+            body,
+            style: const TextStyle(
+              color: Color(0xFF9D9387),
+              height: 1.45,
+            ),
+          ),
         ],
       ),
     );
@@ -259,52 +282,62 @@ class _CompassDiagram extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final size = math.min(constraints.maxWidth, 620.0);
+        final availableWidth = constraints.maxWidth;
+        final labelGutter = math.min(
+          110.0,
+          math.max(72.0, availableWidth * 0.12),
+        );
+        final ringSize = math.min(
+          620.0,
+          math.max(320.0, availableWidth - (labelGutter * 2)),
+        );
+        final canvasSize = ringSize + (labelGutter * 2);
         return Center(
           child: SizedBox(
-            width: size,
-            height: size,
+            width: canvasSize,
+            height: canvasSize,
             child: Stack(
-              clipBehavior: Clip.none,
               alignment: Alignment.center,
               children: [
-                _ring(size * 0.98, const Color(0xFF1B1B1B), 1),
-                _ring(size * 0.78, const Color(0xFF2B2015), 1.4),
-                _ring(size * 0.58, const Color(0xFF3B2A1B), 1.6),
-                _ring(size * 0.38, const Color(0xFF5D3A1B), 1.8),
-                _centerCore(size * 0.28),
+                _ring(ringSize * 0.98, const Color(0xFF1B1B1B), 1),
+                _ring(ringSize * 0.78, const Color(0xFF2B2015), 1.4),
+                _ring(ringSize * 0.58, const Color(0xFF3B2A1B), 1.6),
+                _ring(ringSize * 0.38, const Color(0xFF5D3A1B), 1.8),
+                _centerCore(ringSize * 0.28),
                 ..._buildRadialLabels(
-                  radius: size * 0.44,
+                  radius: ringSize * 0.36,
                   labels: fixItems.take(6).toList(),
                   chipColor: const Color(0xFF1A1A1A),
                   textColor: const Color(0xFFE2C9B3),
                 ),
                 ..._buildRadialLabels(
-                  radius: size * 0.62,
+                  radius: ringSize * 0.50,
                   labels: rays.map((ray) => ray.name).toList(),
                   chipColor: const Color(0xFF111111),
                   textColor: Colors.white,
                 ),
                 ..._buildRadialLabels(
-                  radius: size * 0.82,
+                  radius: ringSize * 0.61,
                   labels: timeRays.map((ray) => ray.label).toList(),
                   chipColor: const Color(0xFFF59E0B),
                   textColor: const Color(0xFF111111),
+                  maxChipWidth: 100,
+                  angleOffset: -math.pi / 2.6,
                 ),
                 Positioned(
-                  top: size * 0.1,
+                  top: labelGutter + (ringSize * 0.13),
                   child: _ringLabel('Zeitstrahlen'),
                 ),
                 Positioned(
-                  top: size * 0.24,
+                  top: labelGutter + (ringSize * 0.28),
                   child: _ringLabel('Strahlen'),
                 ),
                 Positioned(
-                  top: size * 0.38,
+                  top: labelGutter + (ringSize * 0.43),
                   child: _ringLabel('Fixkreis'),
                 ),
                 Positioned(
-                  bottom: size * 0.28,
+                  bottom: labelGutter + (ringSize * 0.25),
                   child: _ringLabel('Orbit'),
                 ),
               ],
@@ -413,18 +446,20 @@ class _CompassDiagram extends StatelessWidget {
     required List<String> labels,
     required Color chipColor,
     required Color textColor,
+    double maxChipWidth = 118,
+    double angleOffset = -math.pi / 2,
   }) {
     final widgets = <Widget>[];
     final total = labels.length;
     for (var i = 0; i < total; i++) {
-      final angle = (-math.pi / 2) + (i * (2 * math.pi / total));
+      final angle = angleOffset + (i * (2 * math.pi / total));
       final dx = math.cos(angle) * radius;
       final dy = math.sin(angle) * radius;
       widgets.add(
         Transform.translate(
           offset: Offset(dx, dy),
           child: Container(
-            constraints: const BoxConstraints(maxWidth: 118),
+            constraints: BoxConstraints(maxWidth: maxChipWidth),
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
             decoration: BoxDecoration(
               color: chipColor,
@@ -464,10 +499,8 @@ class _TimeRay {
 }
 
 List<String> _buildFixItems(SonnenkompassStore store) {
-  final fixedSlots = store.fixedSlots
-      .take(2)
-      .map((slot) => slot.title)
-      .toList();
+  final fixedSlots =
+      store.fixedSlots.take(2).map((slot) => slot.title).toList();
   return [
     'Arbeit',
     'Mahlzeiten',

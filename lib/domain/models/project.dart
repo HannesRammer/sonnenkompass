@@ -116,7 +116,8 @@ class Project {
       status: enumFromString(ProjectStatus.values, json['status'] as String),
       priority:
           enumFromString(PriorityLevel.values, json['priority'] as String),
-      energyFit: enumFromString(EnergyLevel.values, json['energyFit'] as String),
+      energyFit:
+          enumFromString(EnergyLevel.values, json['energyFit'] as String),
       effortSize: json['effortSize'] as String,
       vision: json['vision'] as String,
       currentGoal: json['currentGoal'] as String,

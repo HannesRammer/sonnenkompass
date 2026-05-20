@@ -29,6 +29,7 @@ Stand: 2026-05-09
 - ausfuehrliche App-Dokumentation fuer Screens, Layouts, Funktionen, Entscheidungen und offene Baustellen angelegt
 - Dashboard in ein kreisfoermiges Hybridmodell aus Kern, Fixkreis, Orbit, Strahlen und Zeitstrahlen ueberfuehrt
 - Strahlenansicht um eine radiale Strahl-Navigation erweitert
+- visuelle Sprache auf editoriales Dark-Design mit Serif-Akzenten, feinen Rahmen und ruhigeren Oberflaechen umgestellt
 
 ## Analyse: was besser ist
 

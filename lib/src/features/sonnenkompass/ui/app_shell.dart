@@ -26,22 +26,35 @@ class AppShell extends StatelessWidget {
       return Scaffold(
         body: Row(
           children: [
-            NavigationRail(
-              selectedIndex: index,
-              onDestinationSelected: (selected) {
-                context.go(_destinations[selected].route);
-              },
-              labelType: NavigationRailLabelType.all,
-              destinations: _destinations
-                  .map(
-                    (destination) => NavigationRailDestination(
-                      icon: Icon(destination.icon),
-                      label: Text(destination.label),
-                    ),
-                  )
-                  .toList(),
+            Container(
+              width: 112,
+              decoration: const BoxDecoration(
+                color: Color(0xFF050505),
+                border: Border(
+                  right: BorderSide(color: Color(0xFF161513)),
+                ),
+              ),
+              child: NavigationRail(
+                selectedIndex: index,
+                onDestinationSelected: (selected) {
+                  context.go(_destinations[selected].route);
+                },
+                backgroundColor: Colors.transparent,
+                indicatorShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                groupAlignment: -0.8,
+                labelType: NavigationRailLabelType.all,
+                destinations: _destinations
+                    .map(
+                      (destination) => NavigationRailDestination(
+                        icon: Icon(destination.icon),
+                        label: Text(destination.label),
+                      ),
+                    )
+                    .toList(),
+              ),
             ),
-            const VerticalDivider(width: 1),
             Expanded(child: child),
           ],
         ),
@@ -51,6 +64,7 @@ class AppShell extends StatelessWidget {
     return Scaffold(
       body: child,
       bottomNavigationBar: NavigationBar(
+        height: 72,
         selectedIndex: index,
         onDestinationSelected: (selected) {
           context.go(_destinations[selected].route);

@@ -25,11 +25,11 @@ class ProjectDetailPage extends StatelessWidget {
     }
 
     final tasks = store.tasksForProject(project.id);
-    final ideas = store.ideas
-        .where((idea) => idea.projectId == project.id)
-        .toList();
+    final ideas =
+        store.ideas.where((idea) => idea.projectId == project.id).toList();
     final isPrimary = store.primaryProject.id == project.id;
-    final isSecondary = store.secondaryProjects.any((candidate) => candidate.id == project.id);
+    final isSecondary =
+        store.secondaryProjects.any((candidate) => candidate.id == project.id);
 
     return buildPageScaffold(
       title: project.name,
@@ -40,7 +40,8 @@ class ProjectDetailPage extends StatelessWidget {
           child: Text(isPrimary ? 'Ist Kern' : 'Zum Kern machen'),
         ),
         OutlinedButton(
-          onPressed: isPrimary ? null : () => store.toggleSecondaryProject(project.id),
+          onPressed:
+              isPrimary ? null : () => store.toggleSecondaryProject(project.id),
           child: Text(isSecondary ? 'Aus Orbit entfernen' : 'In Orbit setzen'),
         ),
       ],
@@ -73,7 +74,8 @@ class ProjectDetailPage extends StatelessWidget {
                         (status) => ChoiceChip(
                           selected: project.status == status,
                           label: Text(status.name),
-                          onSelected: (_) => store.updateProjectStatus(project.id, status),
+                          onSelected: (_) =>
+                              store.updateProjectStatus(project.id, status),
                         ),
                       )
                       .toList(),

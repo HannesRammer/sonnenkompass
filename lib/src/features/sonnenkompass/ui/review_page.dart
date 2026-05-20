@@ -46,17 +46,17 @@ class _ReviewPageState extends State<ReviewPage> {
           'Der Tag endet nicht im Vergessen. Fokus, Ablenkungen und Ergebnis bleiben sichtbar.',
       actions: [
         FilledButton(
-              onPressed: () async {
-                await store.updateReview(
-                  dailyNote: dailyNoteController!.text.trim(),
-                  distractionLog: distractionController!.text.trim(),
-                  dayReview: reviewController!.text.trim(),
-                );
-                if (!context.mounted) return;
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Review gespeichert')),
-                );
-              },
+          onPressed: () async {
+            await store.updateReview(
+              dailyNote: dailyNoteController!.text.trim(),
+              distractionLog: distractionController!.text.trim(),
+              dayReview: reviewController!.text.trim(),
+            );
+            if (!context.mounted) return;
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Review gespeichert')),
+            );
+          },
           child: const Text('Review speichern'),
         ),
         OutlinedButton(
@@ -74,7 +74,8 @@ class _ReviewPageState extends State<ReviewPage> {
               maxLines: 3,
               decoration: const InputDecoration(
                 labelText: 'Tagesnotiz',
-                hintText: 'Was war heute der Plan und was ist wirklich passiert?',
+                hintText:
+                    'Was war heute der Plan und was ist wirklich passiert?',
               ),
             ),
             const SizedBox(height: 16),

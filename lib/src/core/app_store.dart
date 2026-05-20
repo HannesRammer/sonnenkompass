@@ -60,8 +60,9 @@ class SonnenkompassStore extends ChangeNotifier {
       ),
       completedRoutineIds:
           (json['completedRoutineIds'] as List<dynamic>).cast<String>().toSet(),
-      completedRhythmTaskIds:
-          (json['completedRhythmTaskIds'] as List<dynamic>).cast<String>().toSet(),
+      completedRhythmTaskIds: (json['completedRhythmTaskIds'] as List<dynamic>)
+          .cast<String>()
+          .toSet(),
     );
   }
 
@@ -80,8 +81,7 @@ class SonnenkompassStore extends ChangeNotifier {
   List<FixedSlot> get fixedSlots => seedFixedSlots;
   UserProfile get profile => seedUserProfile;
 
-  Project get primaryProject =>
-      projectById(primaryOrbitItem.itemId)!;
+  Project get primaryProject => projectById(primaryOrbitItem.itemId)!;
 
   OrbitItem get primaryOrbitItem =>
       orbitItems.firstWhere((item) => item.id == focusDay.primaryOrbitItemId);
@@ -94,15 +94,11 @@ class SonnenkompassStore extends ChangeNotifier {
       .whereType<Project>()
       .toList();
 
-  List<Task> get mustDoTasks => focusDay.mustDoTaskIds
-      .map(taskById)
-      .whereType<Task>()
-      .toList();
+  List<Task> get mustDoTasks =>
+      focusDay.mustDoTaskIds.map(taskById).whereType<Task>().toList();
 
-  List<Task> get optionalTasks => focusDay.optionalTaskIds
-      .map(taskById)
-      .whereType<Task>()
-      .toList();
+  List<Task> get optionalTasks =>
+      focusDay.optionalTaskIds.map(taskById).whereType<Task>().toList();
 
   Ray rayById(String id) => rays.firstWhere((ray) => ray.id == id);
 
@@ -149,22 +145,24 @@ class SonnenkompassStore extends ChangeNotifier {
 
   Future<void> setPrimaryProject(String projectId) async {
     final previousPrimary = primaryOrbitItem;
-    final existing = orbitItems.where((item) => item.itemId == projectId).firstWhere(
-          (item) => item.role == OrbitRole.primaryFocus,
-          orElse: () => OrbitItem(
-            id: 'orbit-primary-$projectId',
-            itemType: OrbitItemType.project,
-            itemId: projectId,
-            role: OrbitRole.primaryFocus,
-            focusDate: focusDay.date,
-            reason: 'Aktiver Kernfokus im Sonnenkompass.',
-            activatedAt: DateTime.now(),
-            createdAt: DateTime.now(),
-          ),
-        );
+    final existing =
+        orbitItems.where((item) => item.itemId == projectId).firstWhere(
+              (item) => item.role == OrbitRole.primaryFocus,
+              orElse: () => OrbitItem(
+                id: 'orbit-primary-$projectId',
+                itemType: OrbitItemType.project,
+                itemId: projectId,
+                role: OrbitRole.primaryFocus,
+                focusDate: focusDay.date,
+                reason: 'Aktiver Kernfokus im Sonnenkompass.',
+                activatedAt: DateTime.now(),
+                createdAt: DateTime.now(),
+              ),
+            );
 
     orbitItems = orbitItems
-        .where((item) => item.id != previousPrimary.id && item.itemId != projectId)
+        .where(
+            (item) => item.id != previousPrimary.id && item.itemId != projectId)
         .toList();
     orbitItems.insert(
       0,
@@ -221,8 +219,9 @@ class SonnenkompassStore extends ChangeNotifier {
         workMode: focusDay.workMode,
         energyLevel: focusDay.energyLevel,
         primaryOrbitItemId: focusDay.primaryOrbitItemId,
-        secondaryOrbitItemIds:
-            focusDay.secondaryOrbitItemIds.where((id) => id != existingOrbitItemId).toList(),
+        secondaryOrbitItemIds: focusDay.secondaryOrbitItemIds
+            .where((id) => id != existingOrbitItemId)
+            .toList(),
         movementPlanId: focusDay.movementPlanId,
         mustDoTaskIds: focusDay.mustDoTaskIds,
         optionalTaskIds: focusDay.optionalTaskIds,
@@ -232,7 +231,8 @@ class SonnenkompassStore extends ChangeNotifier {
         createdAt: focusDay.createdAt,
         updatedAt: DateTime.now(),
       );
-      orbitItems = orbitItems.where((item) => item.id != existingOrbitItemId).toList();
+      orbitItems =
+          orbitItems.where((item) => item.id != existingOrbitItemId).toList();
       await _commit();
       return;
     }
@@ -256,7 +256,8 @@ class SonnenkompassStore extends ChangeNotifier {
         : currentProjectSecondaryIds;
 
     orbitItems = [
-      ...orbitItems.where((item) => !currentProjectSecondaryIds.contains(item.id)),
+      ...orbitItems
+          .where((item) => !currentProjectSecondaryIds.contains(item.id)),
       ...remainingProjectIds.map(orbitItemById).whereType<OrbitItem>(),
       newOrbitItem,
     ];
@@ -271,7 +272,11 @@ class SonnenkompassStore extends ChangeNotifier {
       workMode: focusDay.workMode,
       energyLevel: focusDay.energyLevel,
       primaryOrbitItemId: focusDay.primaryOrbitItemId,
-      secondaryOrbitItemIds: [...remainingProjectIds, newOrbitItem.id, ...nonProjectSecondaryIds],
+      secondaryOrbitItemIds: [
+        ...remainingProjectIds,
+        newOrbitItem.id,
+        ...nonProjectSecondaryIds
+      ],
       movementPlanId: focusDay.movementPlanId,
       mustDoTaskIds: focusDay.mustDoTaskIds,
       optionalTaskIds: focusDay.optionalTaskIds,
@@ -519,7 +524,8 @@ class SonnenkompassStore extends ChangeNotifier {
     await _commit();
   }
 
-  Future<void> updateProjectStatus(String projectId, ProjectStatus status) async {
+  Future<void> updateProjectStatus(
+      String projectId, ProjectStatus status) async {
     projects = projects
         .map(
           (project) => project.id == projectId

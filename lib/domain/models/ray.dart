@@ -91,12 +91,11 @@ class Ray {
       icon: json['icon'] as String,
       sortOrder: json['sortOrder'] as int,
       isActive: json['isActive'] as bool,
-      defaultEnergyFit:
-          enumFromString(EnergyLevel.values, json['defaultEnergyFit'] as String),
+      defaultEnergyFit: enumFromString(
+          EnergyLevel.values, json['defaultEnergyFit'] as String),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       parentRayId: json['parentRayId'] as String?,
     );
   }
 }
-

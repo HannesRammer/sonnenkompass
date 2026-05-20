@@ -136,10 +136,13 @@ class TodayPage extends StatelessWidget {
     return Container(
       width: double.infinity,
       margin: const EdgeInsets.only(bottom: 10),
-      padding: const EdgeInsets.all(14),
+      padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: highlight ? const Color(0xFFFFFAF5) : Colors.white,
-        borderRadius: BorderRadius.circular(18),
+        color: highlight ? const Color(0xFF13100D) : const Color(0xFF101010),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(
+          color: highlight ? const Color(0xFF352616) : const Color(0xFF1D1B18),
+        ),
       ),
       child: Row(
         children: [
@@ -152,9 +155,18 @@ class TodayPage extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(task.title, style: const TextStyle(fontWeight: FontWeight.w700)),
+                Text(
+                  task.title,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFFF4E7D7),
+                  ),
+                ),
                 const SizedBox(height: 4),
-                Text(task.description),
+                Text(
+                  task.description,
+                  style: const TextStyle(color: Color(0xFF9D9387)),
+                ),
               ],
             ),
           ),

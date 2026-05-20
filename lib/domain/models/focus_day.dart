@@ -65,7 +65,8 @@ class FocusDay {
           (json['secondaryOrbitItemIds'] as List<dynamic>).cast<String>(),
       movementPlanId: json['movementPlanId'] as String?,
       mustDoTaskIds: (json['mustDoTaskIds'] as List<dynamic>).cast<String>(),
-      optionalTaskIds: (json['optionalTaskIds'] as List<dynamic>).cast<String>(),
+      optionalTaskIds:
+          (json['optionalTaskIds'] as List<dynamic>).cast<String>(),
       dailyNote: json['dailyNote'] as String?,
       distractionLog: json['distractionLog'] as String?,
       dayReview: json['dayReview'] as String?,
@@ -74,4 +75,3 @@ class FocusDay {
     );
   }
 }
-

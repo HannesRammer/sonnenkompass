@@ -19,7 +19,8 @@ class RaysPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final store = AppScope.of(context);
-    final selectedRay = rayId == null ? store.rays.first : store.rayById(rayId!);
+    final selectedRay =
+        rayId == null ? store.rays.first : store.rayById(rayId!);
     final projects = store.projectsForRay(selectedRay.id);
     final ideas = store
         .ideasForRay(selectedRay.id)
@@ -100,11 +101,13 @@ class RaysPage extends StatelessWidget {
                     const Expanded(
                       child: Text(
                         'Ideen',
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w700),
                       ),
                     ),
                     FilledButton(
-                      onPressed: () => _openIdeaDialog(context, store, selectedRay.id),
+                      onPressed: () =>
+                          _openIdeaDialog(context, store, selectedRay.id),
                       child: const Text('Idee anlegen'),
                     ),
                   ],
@@ -154,7 +157,8 @@ class RaysPage extends StatelessWidget {
                 TextField(
                   controller: summary,
                   maxLines: 3,
-                  decoration: const InputDecoration(labelText: 'Kurzbeschreibung'),
+                  decoration:
+                      const InputDecoration(labelText: 'Kurzbeschreibung'),
                 ),
                 const SizedBox(height: 12),
                 DropdownButtonFormField<MonetizationPotential>(
@@ -264,9 +268,11 @@ class _RayCompass extends StatelessWidget {
                 for (var i = 0; i < rays.length; i++)
                   Transform.translate(
                     offset: Offset(
-                      math.cos((-math.pi / 2) + (i * (2 * math.pi / rays.length))) *
+                      math.cos((-math.pi / 2) +
+                              (i * (2 * math.pi / rays.length))) *
                           radius,
-                      math.sin((-math.pi / 2) + (i * (2 * math.pi / rays.length))) *
+                      math.sin((-math.pi / 2) +
+                              (i * (2 * math.pi / rays.length))) *
                           radius,
                     ),
                     child: _RayNode(

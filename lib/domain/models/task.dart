@@ -101,7 +101,8 @@ class Task {
       status: enumFromString(TaskStatus.values, json['status'] as String),
       priority:
           enumFromString(PriorityLevel.values, json['priority'] as String),
-      energyFit: enumFromString(EnergyLevel.values, json['energyFit'] as String),
+      energyFit:
+          enumFromString(EnergyLevel.values, json['energyFit'] as String),
       estimatedMinutes: json['estimatedMinutes'] as int,
       scheduledForDate: json['scheduledForDate'] == null
           ? null
